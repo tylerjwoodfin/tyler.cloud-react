@@ -11,17 +11,23 @@ const projects = {title: "Projects", items: [
 const nav = [
     {title: "Home", link: "/"},
     {title: "Github", link: "https://github.com/tylerjwoodfin"},
-    {title: "LinkedIn", link: "https://linkedin.com/in/tylerjwoodfin"},
-    projects
+    {title: "LinkedIn", link: "https://linkedin.com/in/tylerjwoodfin"}
 ];
 
 export class Nav extends React.Component {
 
     render() {
         const navItems = nav.map(function mapper(item) {
-            return item.items === undefined ? <li key={item.title}>{item.title}</li> : <li key={item.title}>{item.title}<ul>{item.items.map(mapper)}</ul></li>;
+            return item.items === undefined ? <li key={item.title}><a href={item.link} target="_blank">{item.title}</a></li> : <li key={item.title}>{item.title}<ul>{item.items.map(mapper)}</ul></li>;
         });
 
-        return <div>{navItems}</div>;
+        return (
+            <header>
+                <nav>
+                    <a href="../" id="brand">Tyler Woodfin</a>
+                    <ul id="navItems">{navItems}</ul>
+                </nav>
+            </header>
+        );
     }
 }

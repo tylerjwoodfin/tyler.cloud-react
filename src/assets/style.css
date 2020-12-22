@@ -14,6 +14,56 @@
         text-decoration: none;
     }
 
+    nav {
+      position: fixed;
+      display: flex;
+      right: 0;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 60px;
+      color: #fff;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    nav #brand {
+      font-size: 32px;
+      font-weight: bold;
+      padding-left: 2px;
+      font-family: "light", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+    }
+    nav #navItems {
+      position: relative;
+      display: flex;
+      height: 100%;
+    }
+
+    nav li {
+      padding: 0px 30px;
+      cursor: pointer;
+      line-height: 70px;
+      transition: all 0.2s ease-out;
+      border: 2px solid transparent;
+      font-size: 21px;
+      width: 100%;
+    }
+
+    nav li:hover {
+      background: #333;
+      border: 2px solid #fff;
+    }
+
+    li {
+      font-family: "light", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+    }
+
     img {
       display: block;
       max-height: 45vh;
@@ -41,3 +91,90 @@
         height: 100%;
         color: #fff;
     }
+
+    header {
+      padding-bottom: 80px;
+      margin-bottom: -7px;
+    }
+
+/* Page Elements - Index */
+.column1 {
+  float: left;
+  width: 50%;
+  margin-top: 8%;
+}
+
+.column2 {
+  float: left;
+  width: 50%;
+  padding-right: 60px;
+  margin-top: 8%;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 1200px) {
+  .face {
+    max-width: 196px;
+    max-height: 320px;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+
+  .column2 {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 999px) {
+
+  nav {
+    padding: 0 30px;
+    height: 100px;
+  }
+
+  .column1 {
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+  
+  .column2 {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 30px;
+    margin-top: 40px;
+  }
+
+  .face {
+    max-width: 196px;
+    max-height: 300px;
+  }
+
+  nav #brand {
+    font-size: 30px;
+  }
+
+}
+
+@media screen and (max-width: 999px) and (orientation: landscape) {
+
+  nav {
+    height: 70px;
+  }
+  .column1 {
+    width: 40%;
+    margin-top: 20px;
+  }
+
+  .column2 {
+    width: 60%;
+    margin-top: 20px;
+  }
+
+  .face {
+    max-height: 230px;
+  }
+}
