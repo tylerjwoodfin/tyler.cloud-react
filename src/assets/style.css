@@ -1,0 +1,43 @@
+/* GLOBAL */
+
+    html {
+        box-sizing: border-box;
+        background: #1a1a1a;
+      }
+
+
+    *,*:before,*:after {      /* remove scrollbars */
+        box-sizing: inherit;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-height: 45vh;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 40px;
+      image-orientation: from-image;
+      -webkit-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+      -moz-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+      box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+    }
+
+    @font-face {
+      font-family: 'productSans';
+      src: url('./productSans.ttf');
+    }
+
+    @font-face {
+      font-family: 'light';
+      src: url('./light.ttf');
+    }
+
+    body {
+        font-family: "productSans", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+        height: 100%;
+        color: #fff;
+    }
