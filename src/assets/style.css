@@ -111,6 +111,10 @@
   margin-top: 8%;
 }
 
+.fa {
+  margin-left: 15px;
+}
+
 /* Mobile */
 
 @media screen and (max-width: 1200px) {
