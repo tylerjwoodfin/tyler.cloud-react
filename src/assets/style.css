@@ -14,6 +14,10 @@
         text-decoration: none;
     }
 
+    .hidden {
+      visibility: hidden;
+    }
+
     nav {
       position: fixed;
       display: flex;
@@ -23,7 +27,6 @@
       z-index: 1;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 0 60px;
       color: #fff;
     }
@@ -38,24 +41,23 @@
       font-weight: bold;
       padding-left: 2px;
       font-family: "light", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+      padding-top: 15px;
     }
+
     nav #navItems {
       position: relative;
       display: flex;
-      height: 100%;
     }
 
     nav li {
       padding: 0px 30px;
       cursor: pointer;
       line-height: 70px;
-      transition: all 0.2s ease-out;
       border: 2px solid transparent;
       font-size: 21px;
-      width: 100%;
     }
 
-    nav li:hover {
+    nav li:hover, .selected {
       background: #333;
       border: 2px solid #fff;
     }
@@ -113,6 +115,14 @@
 
 .fa {
   margin-left: 15px;
+}
+
+.projectItems {
+  float: right;
+  border: 2px solid #fff;
+  background: #1a1a1a;
+  display: block;
+  position: fixed;
 }
 
 /* Mobile */

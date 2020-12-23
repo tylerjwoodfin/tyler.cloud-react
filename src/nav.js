@@ -25,16 +25,18 @@ export class Nav extends React.Component {
 
     toggleProjects() {
         this.setState({projectsDisplayed: !this.state.projectsDisplayed });
-        alert("Projects Displayed: " + this.state.projectsDisplayed);
+        // alert("Projects Displayed: " + this.state.projectsDisplayed);
     }
 
-    mapper() {
-        return nav.map((item) => {
+    mapper(items) {
+        return items.map((item) => {
             return item.items === undefined 
             ? <a key={item.title} href={item.link} target="_blank" rel="noreferrer"><li>{item.title}</li></a>
             : <div>
-                <li key={item.title} onClick={this.toggleProjects}>{item.title}<i className="fa fa-caret-down"></i></li>
-                
+                <li key={item.title} class={this.state.projectsDisplayed ? "selected" : ""} onClick={this.toggleProjects}>
+                    {item.title}
+                    <i className={this.state.projectsDisplayed ? "fa fa-caret-up" : "fa fa-caret-down"}></i></li>
+                <ul class={this.state.projectsDisplayed ? "projectItems" : "projectItems hidden"}>{this.mapper(item.items)}</ul>
          </div>;
         });
     }
@@ -44,7 +46,7 @@ export class Nav extends React.Component {
             <header>
                 <nav>
                     <a href="../" id="brand">Tyler Woodfin</a>
-                    <ul id="navItems">{this.mapper()}</ul>
+                    <ul id="navItems">{this.mapper(nav)}</ul>
                 </nav>
             </header>
         );
