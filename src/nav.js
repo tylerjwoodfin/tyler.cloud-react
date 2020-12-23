@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const projects = {title: "Projects", items: [
     {title: "Run, Dino", link: "/"},
@@ -23,20 +24,33 @@ export class Nav extends React.Component {
         this.state = { projectsDisplayed: false};
     }
 
+    componentDidMount() {
+        document.addEventListener('click', this.handleClickOutside, true);
+    }
+
     toggleProjects() {
         this.setState({projectsDisplayed: !this.state.projectsDisplayed });
-        // alert("Projects Displayed: " + this.state.projectsDisplayed);
     }
+
+    handleClickOutside = event => {
+        const domNode = ReactDOM.findDOMNode(this);
+
+        if(!domNode || !domNode.contains(event.target))
+        {
+            this.setState({projectsDisplayed: false });
+        }
+    }
+    
 
     mapper(items) {
         return items.map((item) => {
             return item.items === undefined 
             ? <a key={item.title} href={item.link} target="_blank" rel="noreferrer"><li>{item.title}</li></a>
-            : <div>
-                <li key={item.title} class={this.state.projectsDisplayed ? "selected" : ""} onClick={this.toggleProjects}>
+            : <div id={item.title}>
+                <li key={item.title} className={this.state.projectsDisplayed ? "selected" : ""} onClick={this.toggleProjects}>
                     {item.title}
                     <i className={this.state.projectsDisplayed ? "fa fa-caret-up" : "fa fa-caret-down"}></i></li>
-                <ul class={this.state.projectsDisplayed ? "projectItems" : "projectItems hidden"}>{this.mapper(item.items)}</ul>
+                    <ul key={item.title + "-items"} className={this.state.projectsDisplayed ? "projectItems" : "projectItems hidden"}>{this.mapper(item.items)}</ul>
          </div>;
         });
     }
