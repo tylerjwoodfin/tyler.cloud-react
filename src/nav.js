@@ -45,7 +45,7 @@ export class Nav extends React.Component {
     mapper(items) {
         return items.map((item) => {
             return item.items === undefined 
-            ? <a key={item.title} href={item.link} target="_blank" rel="noreferrer"><li>{item.title}</li></a>
+            ? <a key={item.title} href={item.link} target="_blank" rel="noreferrer"><li key={item.title + "-title"}>{item.title}</li></a>
             : <div id={item.title}>
                 <li key={item.title} className={this.state.projectsDisplayed ? "selected" : ""} onClick={this.toggleProjects}>
                     {item.title}
@@ -60,7 +60,7 @@ export class Nav extends React.Component {
             <header>
                 <nav>
                     <a href="../" id="brand">Tyler Woodfin</a>
-                    <ul id="navItems">{this.mapper(nav)}</ul>
+                    <ul key="header" id="navItems">{this.mapper(nav)}</ul>
                 </nav>
             </header>
         );

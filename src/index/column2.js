@@ -1,69 +1,106 @@
 import React from 'react';
 import styled from 'styled-components';
-import Ripples from 'react-ripples'
 
 export class Column2 extends React.Component {
 
-    getPage()
+    constructor(props) {
+        super(props);
+        this.toggleReachOut = this.toggleReachOut.bind(this);
+        this.state = { reachOutDisplayed: false};
+    }
+
+    submitFeedback()
     {
-        return (
-            <div></div>
-        );
+        var message = document.getElementById("feedback").value;
+
+        fetch("feedback/post.php?subject=Website&message=" + message)
+            .then(
+                (result) => {
+                    console.log("Success");
+                    console.log(result);
+                },
+                (error) => {
+                    console.log("Error");
+                }
+            );
+
+        console.log("Done");
+        
+        // document.getElementById("bodyFeedback").innerHTML = `Thank you for your message.&nbsp;&nbsp;&nbsp;<a class="nodashed" onclick="resetBodyFeedback()"><em class="fa fa-rotate-left" style="font-size: 24px;"></em></a>`;
+    }
+
+    toggleReachOut()
+    {
+        this.setState({reachOutDisplayed: !this.state.reachOutDisplayed});
     }
 
     render() {
 
-        const Button = styled.button`
+        const ButtonReachOut = styled.button`
             background: transparent;
             border: 3px solid transparent;
-            border-bottom: 3px #236f92 dashed;
+            color: #fccc75;
+            border-bottom: 1px solid;
             border-radius: 3px;
-            color: white;
             font-size: 26pt;
             font-family: "productSans", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
 
             &:hover {
                 border: 3px solid transparent;
-                border-bottom: 3px solid transparent;
+                border-bottom: 1px solid transparent;
+                cursor: pointer;
             }
         `;
 
-        var headline = <h1 class="headline">Hi, I'm Tyler Woodfin.</h1>;
+        const ButtonReachOutActions = styled.button`
+            background: transparent;
+            border: 3px solid transparent;
+            border-radius: 3px;
+            color: white;
+            font-size: 14pt;
+            margin-top: 15px;
+            margin-left: 20px;
+            font-family: "productSans", -apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif;
+
+            &:hover {
+                border: 3px solid transparent;
+                cursor: pointer;
+                color: #fccc75;
+                border-bottom: 1px solid;
+            }
+        `;
+
+        var headline = <h1 className="headline">Hi, I'm Tyler Woodfin.</h1>;
 
         var subHeadlineIcons = 
-            <p style={{fontSize: `18px`, paddingBottom: `20px`}}>
+            <div style={{fontSize: `18px`, paddingBottom: `20px`}}>
 
-                <div class="attributeContainer">
-                    <div class="attributeMap"><em class="fa fa-map-marker" aria-hidden="true"></em>Austin, TX</div>
-                    <div class="attributeCode"><em class="fa fa-code"></em>Software Engineer</div>
+                <div className="attributeContainer">
+                    <div className="attributeMap"><em className="fa fa-map-marker" aria-hidden="true"></em>Austin, TX</div>
+                    <div className="attributeCode"><em className="fa fa-code"></em>Software Engineer</div>
                 </div>
-            </p>;
+            </div>;
 
-        var ripples = <Button>reach out</Button>;
+        var reachOutButton = <ButtonReachOut onClick={this.toggleReachOut}>reach out</ButtonReachOut>;
+
+        var reachOutPrompt = <h2 id="bodyFeedback">This is a space to host all of my projects.<br/><br/>Please {reachOutButton} if you'd like to get in touch.</h2>;
+
+        var reachOutArea = (
+            <div>
+                <textarea id="feedback" autoFocus></textarea><br/>
+                <div className="reachOutActions">
+                    <ButtonReachOutActions onClick={this.toggleReachOut}>CANCEL</ButtonReachOutActions>
+                    <ButtonReachOutActions onClick={this.submitFeedback}>SEND</ButtonReachOutActions>
+                </div>
+            </div>);
         
         var bodyFeedback = 
-            <h2 id="bodyFeedback">This is a space to host all of my projects.
-            <br/><br/>Please {ripples} if you'd like to get in touch.<br/><br/></h2>;
+            <div>
+                {this.state.reachOutDisplayed ? reachOutArea : reachOutPrompt}
+            </div>;
 
         return (
             <div>{headline}{subHeadlineIcons}{bodyFeedback}</div>
         );
     }
 }
-
-/*
-<h1 class="headline">Hi, I'm Tyler Woodfin.</h1>
-        
-        <p style="font-size: 18px; padding-bottom: 20px;">
-
-          <div class="attributeContainer">
-            <div class="attributeMap"><em class="fa fa-map-marker" aria-hidden="true"></em>Austin, TX</div>
-            <div class="attributeCode"><em class="fa fa-code"></em>Software Engineer</div>
-          </div>
-        
-        </p>
-
-        <h2 id="bodyFeedback">
-          This is a space to host all of my projects.<br><br>Please <a onClick="feedback()" class="dashed" >reach out</a> if you'd like to get in touch.
-        </h2>
-*/
