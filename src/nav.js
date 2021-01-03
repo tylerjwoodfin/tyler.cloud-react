@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled, { createGlobalStyle } from "styled-components";
 
 const projects = {title: "Projects", items: [
     {title: "Run, Dino", link: "/"},
@@ -15,6 +16,65 @@ const nav = [
     {title: "LinkedIn", link: "https://linkedin.com/in/tylerjwoodfin"},
     projects
 ];
+
+const HamburgerButton = {
+    Wrapper: styled.button`
+      height: 3rem;
+      width: 3rem;
+      position: relative;
+      font-size: 12px;
+  
+      display: none;
+  
+      @media only screen and (max-width: 54em) {
+        display: block;
+      }
+  
+      /* Remove default button styles */
+      border: none;
+      background: transparent;
+      outline: none;
+  
+      cursor: pointer;
+  
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 150%;
+        width: 150%;
+        top: -25%;
+        left: -25%;
+      }
+    `,
+    Lines: styled.div`
+      bottom: 30%;
+      margin-bottom: -0.125em;
+  
+      &,
+      &:after,
+      &:before {
+        /* Create lines */
+        height: 2px;
+        pointer-events: none;
+        display: block;
+        content: "";
+        width: 100%;
+        background-color: white;
+        position: absolute;
+      }
+  
+      &:after {
+        /* Move bottom line below center line */
+        top: -0.8rem;
+      }
+  
+      &:before {
+        /* Move top line on top of center line */
+        top: 0.8rem;
+      }
+    `
+  };
 
 export class Nav extends React.Component {
 
@@ -40,7 +100,6 @@ export class Nav extends React.Component {
             this.setState({projectsDisplayed: false });
         }
     }
-    
 
     mapper(items) {
         return items.map((item) => {
@@ -60,9 +119,14 @@ export class Nav extends React.Component {
             <header>
                 <nav>
                     <a href="../" id="brand">Tyler Woodfin</a>
-                    <ul key="header" id="navItems">{this.mapper(nav)}</ul>
+                    <HamburgerButton.Wrapper onClick={() => alert("Test")}><HamburgerButton.Lines /></HamburgerButton.Wrapper>
+                    <ul key="header" id="navItems">
+                        {this.mapper(nav)}
+                    </ul>
                 </nav>
             </header>
         );
     }
 }
+
+// this.mapper(nav)

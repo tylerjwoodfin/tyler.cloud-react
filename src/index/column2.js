@@ -13,7 +13,7 @@ export class Column2 extends React.Component {
     {
         var message = document.getElementById("feedback").value;
 
-        fetch("feedback/post.php?subject=Website&message=" + message)
+        fetch("../feedback/post.php?subject=Website&message=" + message)
             .then(
                 (result) => {
                     console.log("Success");
