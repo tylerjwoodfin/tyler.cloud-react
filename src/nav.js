@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 const projects = {title: "Projects", items: [
     {title: "Run, Dino", link: "/"},
@@ -23,6 +23,7 @@ const HamburgerButton = {
       width: 3rem;
       position: relative;
       font-size: 12px;
+      margin-left: 85%;
   
       display: none;
   
@@ -81,7 +82,8 @@ export class Nav extends React.Component {
     constructor(props) {
         super(props);
         this.toggleProjects = this.toggleProjects.bind(this);
-        this.state = { projectsDisplayed: false};
+        this.toggleMobileMenu = this.toggleMobileMenu.bind(this);
+        this.state = { projectsDisplayed: false, mobileMenuDisplayed: false};
     }
 
     componentDidMount() {
@@ -92,12 +94,17 @@ export class Nav extends React.Component {
         this.setState({projectsDisplayed: !this.state.projectsDisplayed });
     }
 
+    toggleMobileMenu() {
+      this.setState({mobileMenuDisplayed: !this.state.mobileMenuDisplayed });
+      console.log("Displayed: " + this.state.mobileMenuDisplayed);
+  }
+
     handleClickOutside = event => {
         const domNode = ReactDOM.findDOMNode(this);
 
         if(!domNode || !domNode.contains(event.target))
         {
-            this.setState({projectsDisplayed: false });
+            this.setState({projectsDisplayed: false, mobileMenuDisplayed: false });
         }
     }
 
@@ -117,10 +124,10 @@ export class Nav extends React.Component {
     render() {
         return (
             <header>
-                <nav>
+                <nav className={this.state.mobileMenuDisplayed ? "mobileMenuDisplayed" : ""}>
                     <a href="../" id="brand">Tyler Woodfin</a>
-                    <HamburgerButton.Wrapper onClick={() => alert("Test")}><HamburgerButton.Lines /></HamburgerButton.Wrapper>
-                    <ul key="header" id="navItems">
+                    <HamburgerButton.Wrapper onClick={this.toggleMobileMenu}><HamburgerButton.Lines /></HamburgerButton.Wrapper>
+                    <ul key="header" className={this.state.mobileMenuDisplayed ? "navItems" : "navItems hiddenOnMobile"}>
                         {this.mapper(nav)}
                     </ul>
                 </nav>
@@ -128,5 +135,3 @@ export class Nav extends React.Component {
         );
     }
 }
-
-// this.mapper(nav)

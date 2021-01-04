@@ -16,6 +16,7 @@
 
     .hidden {
       visibility: hidden;
+      display: none;
     }
 
     nav {
@@ -46,7 +47,7 @@
       padding-top: 15px;
     }
 
-    nav #navItems {
+    nav .navItems {
       position: relative;
       display: flex;
     }
@@ -213,8 +214,41 @@ textarea {
 
 @media screen and (max-width: 54em) {
 
-  nav #navItems {
+  nav .navItems {
+    display: block;
+    padding-top: 15px;
+  }
+  
+  nav .hiddenOnMobile {
     display: none;
+  }
+
+  nav {
+    display: block;
+    padding-bottom: 25px;
+  }
+
+  nav li {
+    text-align: center;
+  }
+
+  .projectItems {
+    height: 40%;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    height: -moz-available;
+    height: -webkit-fill-available;
+  }
+
+  .mobileMenuDisplayed {
+    padding-bottom: 0px;
+  }
+
+  #brand {
+    position: absolute;
   }
 
   .attributeContainer {
