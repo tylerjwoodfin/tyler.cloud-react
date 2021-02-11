@@ -31,7 +31,7 @@
       padding: 0 60px;
       color: #fff;
       background: #1a1a1a;
-      opacity: 95%;
+      /* opacity: 95%; */
     }
 
     nav a, #brand {
